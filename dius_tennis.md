@@ -1,67 +1,54 @@
-DiUS is hosting a tennis tournament. To aid with this, we're developing a scoring system.
+DiUS is starting a bowling club. To help with the club, we have engaged you to program a scoring system. 
 
-The scoring system for tennis works like this.
+The features on the system are:
 
-A match has one set and a set has many games
+* One player only
+* In each frame, the bowler has 2 tries to knock down all the pins
+* If in 2 tries, the bowler fails to knock down all the pins, their score is the sum of the number of pins they've knocked down in the 2 attempts
 
-A game is won by the first player to have won at least 4 points in total and at least 2 points more than the opponent.
+E.g, if a bowler rolls, 4,4
 
-The running score of each game is described in a manner peculiar to tennis: scores from zero to three points are described as 0, 15, 30, 40, respectively
-If at least 3 points have been scored by each player, and the scores are equal, the score is "deuce".
+Their score is 8.  
 
-If at least 3 points have been scored by each side and a player has one more point than his opponent, the score of the game is "advantage" for the player in the lead.
+* If in 2 tries, the bowler knocks down all the pins, it is a spare. The scoring of a spare is the sum of the number of pins knocked down plus the number of pins knocked down in the next bowl.
 
-There are many games to a set in tennis
+E.g, if a bowler rolls, 4,6 |  5, 0
 
-A player wins a set by winning at least 6 games and at least 2 games more than the opponent.
+Their score is 20. So that's (4 + 6 + 5) + (5 + 0)
 
-If one player has won six games and the opponent five, an additional game is played. If the leading player wins that game, the player wins the set 7–5. If the trailing player wins the game, a tie-break is played.
+* If in one try, the bowler knocks down all the pins, it is a strike. The scoring of a strike is the sum of the number of pins knocked down plus the number of pins knocked down in the next two bowls.
 
-A tie-break, played under a separate set of rules, allows one player to win one more game and thus the set, to give a final set score of 7–6. A tie-break is scored one point at a time. The tie-break game continues until one player wins seven points by a margin of two or more points. Instead of being scored from 0, 15, 30, 40 like regular games, the score for a tie breaker goes up incrementally from 0 by 1. i.e a player's score will go from 0 to 1 to 2 to 3 …etc.
+E.g, if a bowler rolls, 10 | 5, 4
 
-Add a score method that will return the current set score followed by the current game score
+Their score is 28. So that's (10 + 5 + 4) + ( 5 + 4)
 
-Add a pointWonBy method that indicates who won the point
+* There are 10 pins in a frame
+* There are 10 frames in a match
+* Don't worry about validating the number of rolls in a frame
 
-Constraints
-
-Only worry about 1 set
-Don't worry about validation, assume the client passes in correct data
-More information on tennis scoring can be found here https://en.wikipedia.org/wiki/Tennis_scoring_system
-
-For example:
-
-The interface should look something like this in Java:
+The interface should look like this (in Java);
 
 
-  Match match = new Match("player 1", "player 2");
-  match.pointWonBy("player 1");
-  match.pointWonBy("player 2");
-  // this will return "0-0, 15-15"
-  match.score();
+```java
+bowlingGame.roll(noOfPins);
+bowlingGame.score();
+```
 
-  match.pointWonBy("player 1");
-  match.pointWonBy("player 1");
-  // this will return "0-0, 40-15"
-  match.score();
-  
-  match.pointWonBy("player 2");
-  match.pointWonBy("player 2");
-  // this will return "0-0, Deuce"
-  match.score();
-  
-  match.pointWonBy("player 1");
-  // this will return "0-0, Advantage player 1"
-  match.score();
-  
-  match.pointWonBy("player 1");
-  // this will return "1-0"
-  match.score();
- 
+OPTIONAL
+--------
+
+If time permits implement the rules for the last frame (i.e, 10th frame)
+
+* In the last frame, if the bowler bowls a spare, they get another bowl. The score of this frame is the sum of the three bowls.
+* In the last frame, if the bowler bowls a strike, they get another 2 bowls. The score of this frame is the sum of the three bowls
+* If one has a strike for every roll, their score is 300
+
 Notes on implementation:
 
-use Java, Javascript, Groovy, Scala, Ruby or Swift
-try not to spend more than 2 hours maximum. (We don't want you to lose a weekend over this!)
-don't build guis etc, we're more interested in your approach to solving the given task, not how shiny it looks.
-don't use any frameworks (rails, spring etc), or any external jars/gems (unless it's for testing..)
+- use **Java, Javascript, Ruby, Kotlin, Swift, or Groovy**
+- try not to spend more than 2 hours maximum. (We don't want you to lose a weekend over this!)
+- don't build guis etc, we're more interested in your approach to solving the given task, not how shiny it looks
+- don't worry about making a command line interface to the application
+- don't use any frameworks (rails, spring etc), or any external jars/gems (unless it's for testing or build/dependency mgt)
+
 When you've finished, send through the link to your github-repo. Happy coding
